@@ -1,0 +1,10 @@
+/* TEAM */
+	Casual Developer: Ilya Pleshakov
+	Contact: da-eto [at] ya.ru
+	GitHub: @da-eto-ya
+	From: Saint-Petersburg, Russian Federation
+
+/* THANKS */
+	Image dealer: Pusheen the cat
+	URL: http://www.pusheen.com/
+	From: Catland

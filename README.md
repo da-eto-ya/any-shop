@@ -1,2 +1,3 @@
 # any-shop
-Simple Symfony shop example
+
+Simple Symfony 3.2 shop example.
