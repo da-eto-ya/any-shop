@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "00fb0b0b8fdfef62574263a441f3a0a3",
+    "content-hash": "e23242debf48532f033e04b99842cd55",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -2485,6 +2485,54 @@
             "time": "2017-02-14T19:40:03+00:00"
         },
         {
+            "name": "da-eto-ya/behat-spawner-extension",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/da-eto-ya/behat-spawner-extension.git",
+                "reference": "8ccb5329a2b82c0f0d314bba39db79d12f15ed0e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/da-eto-ya/behat-spawner-extension/zipball/8ccb5329a2b82c0f0d314bba39db79d12f15ed0e",
+                "reference": "8ccb5329a2b82c0f0d314bba39db79d12f15ed0e",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "~3.0",
+                "php": ">=5.3.4",
+                "symfony/process": ">=2.3.12"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Behat\\SpawnerExtension": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ilya Pleshakov",
+                    "email": "da-eto@ya.ru"
+                }
+            ],
+            "description": "Spawns processes when Behat starts",
+            "homepage": "https://github.com/da-eto-ya/behat-spawner-extension",
+            "keywords": [
+                "Behat",
+                "extension",
+                "process",
+                "spawner"
+            ],
+            "time": "2015-11-13T15:48:20+00:00"
+        },
+        {
             "name": "fabpot/goutte",
             "version": "v3.2.1",
             "source": {
@@ -2929,7 +2977,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "da-eto-ya/behat-spawner-extension": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

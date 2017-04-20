@@ -5,3 +5,6 @@ default:
       sessions:
         default:
           goutte: ~
+    Behat\SpawnerExtension\ServiceContainer\SpawnerExtension:
+      commands:           # array-formatted command list
+        - [php, -S, localhost:8089, -t, web, web/app_test.php]

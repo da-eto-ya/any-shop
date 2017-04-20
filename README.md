@@ -4,10 +4,11 @@ Simple Symfony 3.2 shop example.
 
 ## Install
 
-Clone repository:
+Clone repository and install dependencies:
 
 ```sh
 $ git clone git@github.com:da-eto-ya/any-shop.git
+$ composer install
 ```
 
 Copy `app/config/parameters.yml.dist` to `app/config/parameters.yml`
@@ -24,16 +25,10 @@ and production version (for development purpose) should be available at [http://
 
 ## Testing
 
-Run testing server from application directory:
-
-```sh
-$ php bin/console server:run --env=test localhost:8089
-```
-
-Then application should be available at [http://localhost:8089/app_test.php]().
-
 Run scenarios:
 
 ```sh
 $ ./vendor/bin/behat
 ```
+
+Testing server at [http://localhost:8089]() will be spawned while Behat runs. 
