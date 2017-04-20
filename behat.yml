@@ -1,0 +1,7 @@
+default:
+  extensions:
+    Behat\MinkExtension:
+      base_url:  'http://localhost:8089/app_test.php'
+      sessions:
+        default:
+          goutte: ~
