@@ -118,6 +118,7 @@ class FeatureContext extends MinkContext implements Context
      */
     public function theProductHasImage(Product $existingProduct, ProductImage $imageFromFixture)
     {
+        $imageFromFixture->setAlt("Image for ".$existingProduct->getTitle());
         $existingProduct->setImage($imageFromFixture);
 
         $em = $this->getEntityManager();

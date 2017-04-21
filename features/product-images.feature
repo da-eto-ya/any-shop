@@ -7,4 +7,4 @@ Feature: Product images
     Given shop sells "Lenovo ThinkPad X1 Yoga"
     And product "Lenovo ThinkPad X1 Yoga" has image "images/product/yoga.jpg"
     When I am on "/"
-    Then the ".product-item" element should contain "yoga.jpg"
+    Then the ".product-item" element should contain "Image for Lenovo ThinkPad X1 Yoga"
