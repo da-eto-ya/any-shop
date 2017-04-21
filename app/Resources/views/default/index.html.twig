@@ -9,10 +9,10 @@
                 <h1><span>Welcome to</span> Any Shop</h1>
             </div>
 
-            <div id="products">
-                <ul>
+            <div id="products" class="product-container">
+                <ul class="product-list">
                     {% for product in products %}
-                        <li>{{ product.title }}</li>
+                        <li class="product-item">{{ product.title }}</li>
                     {% endfor %}
                 </ul>
             </div>

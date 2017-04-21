@@ -53,13 +53,27 @@ class FeatureContext extends MinkContext implements Context
     }
 
     /**
-     * @Given /^I have product "([^"]*)" on shop$/
-     * @param string $title
+     * @Transform :product
+     *
+     * @param string $product
+     *
+     * @return Product
      */
-    public function iHaveProductOnShop(string $title)
+    public function castTitleToProduct(string $product)
     {
-        $product = new Product();
-        $product->setTitle($title);
+        $entity = new Product();
+        $entity->setTitle($product);
+
+        return $entity;
+    }
+
+    /**
+     * @Given shop sells :product
+     *
+     * @param Product $product
+     */
+    public function shopSells(Product $product)
+    {
         $em = $this->getEntityManager();
         $em->persist($product);
         $em->flush($product);
