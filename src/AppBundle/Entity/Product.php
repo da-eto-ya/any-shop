@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product
 {
-
     /**
      * @var int
      *
@@ -30,8 +29,13 @@ class Product
     private $title;
 
     /**
-     * Get id
+     * @var ProductImage
      *
+     * @ORM\ManyToOne(targetEntity="ProductImage", cascade={"persist", "remove"})
+     */
+    private $image;
+
+    /**
      * @return int
      */
     public function getId()
@@ -40,8 +44,6 @@ class Product
     }
 
     /**
-     * Set title
-     *
      * @param string $title
      *
      * @return Product
@@ -54,12 +56,30 @@ class Product
     }
 
     /**
-     * Get title
-     *
      * @return string
      */
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    /**
+     * @param ProductImage|null $image
+     *
+     * @return Product
+     */
+    public function setImage(?ProductImage $image): Product
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return ProductImage|null
+     */
+    public function getImage(): ?ProductImage
+    {
+        return $this->image;
     }
 }

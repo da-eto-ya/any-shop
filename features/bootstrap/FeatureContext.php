@@ -1,6 +1,7 @@
 <?php
 
 use AppBundle\Entity\Product;
+use AppBundle\Entity\ProductImage;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -68,6 +69,36 @@ class FeatureContext extends MinkContext implements Context
     }
 
     /**
+     * @Transform :existingProduct
+     *
+     * @param string $existingProduct
+     *
+     * @return Product
+     */
+    public function castTitleToExistingProduct(string $existingProduct)
+    {
+        $repository = $this->getEntityManager()->getRepository(Product::class);
+
+        return $repository->findOneBy(['title' => $existingProduct]);
+    }
+
+    /**
+     * @Transform :imageFromFixture
+     *
+     * @param string $imageFromFixture
+     *
+     * @return ProductImage
+     */
+    public function castFixtureImageToImage(string $imageFromFixture)
+    {
+        $path = $this->getContainerParameter('web_fixtures_path').'/'.$imageFromFixture;
+        $entity = new ProductImage();
+        $entity->setPath($path);
+
+        return $entity;
+    }
+
+    /**
      * @Given shop sells :product
      *
      * @param Product $product
@@ -80,6 +111,21 @@ class FeatureContext extends MinkContext implements Context
     }
 
     /**
+     * @Given product :existingProduct has image :imageFromFixture
+     *
+     * @param Product $existingProduct
+     * @param         $imageFromFixture
+     */
+    public function theProductHasImage(Product $existingProduct, ProductImage $imageFromFixture)
+    {
+        $existingProduct->setImage($imageFromFixture);
+
+        $em = $this->getEntityManager();
+        $em->persist($imageFromFixture);
+        $em->flush();
+    }
+
+    /**
      * Get default Doctrine entity manager
      *
      * @return EntityManager
@@ -87,5 +133,10 @@ class FeatureContext extends MinkContext implements Context
     private function getEntityManager()
     {
         return $this->getContainer()->get('doctrine')->getManager();
+    }
+
+    private function getContainerParameter(string $name)
+    {
+        return $this->getContainer()->getParameter($name);
     }
 }

@@ -24,3 +24,6 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+parameters:
+    web_fixtures_path: '/fixtures'

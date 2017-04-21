@@ -3,6 +3,7 @@
 {% block title %}Any Shop{% endblock %}
 
 {% block body %}
+    <!--suppress CssUnusedSymbol -->
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
@@ -11,9 +12,22 @@
 
             <div id="products" class="product-container">
                 <ul class="product-list">
+
                     {% for product in products %}
-                        <li class="product-item">{{ product.title }}</li>
+                        <li class="product-item">
+
+                            {% if product.image and product.image.path %}
+                                <img class="product-image" src="{{ asset(product.image.path) }}"
+                                     alt="{{ product.image.alt }}">
+                            {% else %}
+                                <img class="product-image" src="{{ asset('images/no-image.png') }}"
+                                     alt="{{ product.title }}">
+                            {% endif %}
+
+                            <span class="product-title">{{ product.title }}</span>
+                        </li>
                     {% endfor %}
+
                 </ul>
             </div>
         </div>
