@@ -1,7 +1,7 @@
 Feature: Search
   In order to find products in Any Shop
   As a website user
-  I need to be able to search and find products
+  I need to be able to search by title and find some products
 
   Background:
     Given shop sells "Lenovo ThinkPad X1 Yoga"
@@ -40,3 +40,11 @@ Feature: Search
     And press "Find"
     Then I should see "Lenovo_IBM"
     And I should not see "Lenovo2IBM"
+
+  Scenario: Case insensitive search
+    Given I am on "/"
+    When I fill in "Query" with "yoga"
+    And press "Find"
+    Then I should see "Lenovo ThinkPad X1 Yoga"
+    And I should see "Lenovo ThinkPad P40 Yoga with IPS"
+    But I should not see "Apple MacBook Early 2016"
