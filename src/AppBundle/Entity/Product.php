@@ -31,7 +31,7 @@ class Product
     /**
      * @var ProductImage
      *
-     * @ORM\OneToOne(targetEntity="ProductImage", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="ProductImage")
      */
     private $image;
 
