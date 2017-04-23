@@ -15,15 +15,9 @@
 
                     {% for product in products %}
                         <li class="product-item">
-
-                            {% if product.image and product.image.path %}
-                                <img class="product-image" src="{{ asset(product.image.path) }}"
-                                     alt="{{ product.image.alt }}">
-                            {% else %}
-                                <img class="product-image" src="{{ asset('images/no-image.png') }}"
-                                     alt="{{ product.title }}">
-                            {% endif %}
-
+                            <img class="product-image"
+                                 src="{{ asset(product.image ? product.image.path : 'images/no-image.png') }}"
+                                 alt="{{ product.image ? product.image.alt ?: product.title }}">
                             <span class="product-title">{{ product.title }}</span>
                         </li>
                     {% endfor %}
