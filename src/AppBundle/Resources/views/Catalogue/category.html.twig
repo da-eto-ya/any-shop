@@ -7,7 +7,15 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1><span>Welcome to</span> Any Shop</h1>
+                <h1 class="top-heading">
+
+                    {% if category %}
+                        <span><a href="{{ path('homepage') }}">Any Shop</a>:</span> {{ category.title }}
+                    {% else %}
+                        <span>Welcome to</span> Any Shop
+                    {% endif %}
+
+                </h1>
             </div>
 
             <div id="search-form" class="search-form">
@@ -15,6 +23,20 @@
                 {{ form_widget(form) }}
                 {{ form_end(form) }}
             </div>
+
+            <div id="categories" class="categories-container">
+                <ul class="categories-list">
+
+                    {% for category in categories %}
+                        <li class="category-item">
+                            <a href="{{ path('category', {'id': category.id}) }}"
+                               class="category-link"><span class="category-title">{{ category.title }}</span></a>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+
 
             <div id="products" class="product-container">
                 <ul class="product-list">

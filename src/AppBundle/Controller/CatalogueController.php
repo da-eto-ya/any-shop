@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Criteria\ProductSearchCriteria;
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Product;
+use AppBundle\Repository\CategoryRepository;
 use AppBundle\Type\ProductSearchType;
 use AppBundle\Repository\ProductRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -17,19 +19,23 @@ class CatalogueController extends Controller
 {
     /**
      * @Route("/", name="homepage")
+     * @Route("/category/{id}", name="category")
      * @Method("GET")
      * @Template
      *
-     * @param Request $request
+     * @param Category|null $category
+     * @param Request       $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response|array
+     * @return array|\Symfony\Component\HttpFoundation\Response
      */
-    public function homepageAction(Request $request)
+    public function categoryAction(?Category $category, Request $request)
     {
         /** @var Form $searchForm */
         $searchForm = $this->createForm(ProductSearchType::class);
         /** @var ProductRepository $productRepository */
         $productRepository = $this->getDoctrine()->getRepository(Product::class);
+        /** @var CategoryRepository $categoryRepository */
+        $categoryRepository = $this->getDoctrine()->getRepository(Category::class);
 
         $searchForm->handleRequest($request);
 
@@ -43,9 +49,14 @@ class CatalogueController extends Controller
             $products = $productRepository->findAll();
         }
 
+        /** @var Category[] $categories */
+        $categories = $categoryRepository->findAll();
+
         return [
-            'products' => $products,
-            'form'     => $searchForm->createView(),
+            'products'   => $products,
+            'category'   => $category,
+            'categories' => $categories,
+            'form'       => $searchForm->createView(),
         ];
     }
 

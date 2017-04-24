@@ -1,5 +1,6 @@
 <?php
 
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductImage;
 use Behat\Behat\Context\Context;
@@ -69,6 +70,21 @@ class FeatureContext extends MinkContext implements Context
     }
 
     /**
+     * @Transform :category
+     *
+     * @param string $category
+     *
+     * @return Category
+     */
+    public function castTitleToCategory(string $category)
+    {
+        $entity = new Category();
+        $entity->setTitle($category);
+
+        return $entity;
+    }
+
+    /**
      * @Transform :existingProduct
      *
      * @param string $existingProduct
@@ -124,6 +140,18 @@ class FeatureContext extends MinkContext implements Context
         $em = $this->getEntityManager();
         $em->persist($imageFromFixture);
         $em->flush();
+    }
+
+    /**
+     * @Given shop has category :category
+     *
+     * @param Category $category
+     */
+    public function shopHasCategory(Category $category)
+    {
+        $em = $this->getEntityManager();
+        $em->persist($category);
+        $em->flush($category);
     }
 
     /**

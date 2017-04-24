@@ -6,7 +6,9 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1><span>Any Shop:</span> {{ product.title }}</h1>
+                <h1 class="top-heading">
+                    <span><a href="{{ path('homepage') }}">Any Shop</a>:</span> {{ product.title }}
+                </h1>
             </div>
 
             <div id="products" class="product-container">
