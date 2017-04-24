@@ -6,7 +6,9 @@ use AppBundle\Criteria\ProductSearchCriteria;
 use AppBundle\Entity\Product;
 use AppBundle\Type\ProductSearchType;
 use AppBundle\Repository\ProductRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +17,12 @@ class CatalogueController extends Controller
 {
     /**
      * @Route("/", name="homepage")
+     * @Method("GET")
+     * @Template
+     *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response|array
      */
     public function homepageAction(Request $request)
     {
@@ -38,12 +43,23 @@ class CatalogueController extends Controller
             $products = $productRepository->findAll();
         }
 
-        return $this->render(
-            'default/index.html.twig',
-            [
-                'products' => $products,
-                'form'     => $searchForm->createView(),
-            ]
-        );
+        return [
+            'products' => $products,
+            'form'     => $searchForm->createView(),
+        ];
+    }
+
+    /**
+     * @Route("/product/{id}", name="product", requirements={"id": "\d+"})
+     * @Method("GET")
+     * @Template
+     *
+     * @param Product $product
+     *
+     * @return array|\Symfony\Component\HttpFoundation\Response
+     */
+    public function productAction(Product $product)
+    {
+        return ['product' => $product];
     }
 }

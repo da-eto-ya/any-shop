@@ -1,0 +1,24 @@
+{% extends '@App/base.html.twig' %}
+
+{% block title %}Any Shop{% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1><span>Any Shop:</span> {{ product.title }}</h1>
+            </div>
+
+            <div id="products" class="product-container">
+                <div class="product-item">
+                    <img class="product-image"
+                         src="{{ asset(product.image ? product.image.path : 'images/no-image.png') }}"
+                         alt="{{ product.image ? product.image.alt ?: product.title }}">
+                    <span class="product-title">{{ product.title }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

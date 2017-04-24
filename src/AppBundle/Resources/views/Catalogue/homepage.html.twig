@@ -1,0 +1,38 @@
+{% extends '@App/base.html.twig' %}
+
+{% block title %}Any Shop{% endblock %}
+
+{% block body %}
+    <!--suppress CssUnusedSymbol -->
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1><span>Welcome to</span> Any Shop</h1>
+            </div>
+
+            <div id="search-form" class="search-form">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
+
+            <div id="products" class="product-container">
+                <ul class="product-list">
+
+                    {% for product in products %}
+                        <li class="product-item">
+                            <a href="{{ path('product', {'id': product.id}) }}" class="product-link">
+                                <img class="product-image"
+                                     src="{{ asset(product.image ? product.image.path : 'images/no-image.png') }}"
+                                     alt="{{ product.image ? product.image.alt ?: product.title }}">
+                            </a>
+                            <a href="{{ path('product', {'id': product.id}) }}"
+                               class="product-link"><span class="product-title">{{ product.title }}</span></a>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
