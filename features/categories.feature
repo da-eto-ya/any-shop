@@ -32,3 +32,13 @@ Feature: Product categories
     Then I should see "Lenovo ThinkPad X1 Yoga"
     And the ".product-list" element should contain "Image for Lenovo ThinkPad X1 Yoga"
     But I should not see "Lenovo S200z"
+
+  Scenario: Nested categories
+    Given shop has category "Lenovo" in "Laptops"
+    And shop sells "ThinkPad X1 Yoga" in "Lenovo"
+    And shop sells "S200z" in "All-in-one"
+    When I am on "/"
+    And I follow "Laptops"
+    And I follow "Lenovo"
+    Then I should see "ThinkPad X1 Yoga"
+    But I should not see "S200z"

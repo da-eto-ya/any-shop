@@ -184,6 +184,21 @@ class FeatureContext extends MinkContext implements Context
     }
 
     /**
+     * @Given shop has category :category in :existingCategory
+     *
+     * @param Category $category new category
+     * @param Category $existingCategory existing parent category
+     */
+    public function shopHasCategoryIn(Category $category, Category $existingCategory)
+    {
+        $category->setParent($existingCategory);
+
+        $em = $this->getEntityManager();
+        $em->persist($category);
+        $em->flush();
+    }
+
+    /**
      * Get default Doctrine entity manager
      *
      * @return EntityManager

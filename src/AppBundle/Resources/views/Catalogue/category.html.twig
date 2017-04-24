@@ -18,25 +18,45 @@
                 </h1>
             </div>
 
+            {% if categories|length > 0 %}
+                <h2>Categories</h2>
+
+                <div id="categories" class="categories-container">
+                    <ul class="categories-list">
+
+                        {% for category in categories %}
+                            <li class="category-item">
+                                <a href="{{ path('category', {'id': category.id}) }}"
+                                   class="category-link"><span class="category-title">{{ category.title }}</span></a>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            {% endif %}
+
+            {% if category and category.children|length > 0 %}
+                <h2>In this category</h2>
+
+                <div id="clild-categories" class="clild-categories-container">
+                    <ul class="child-categories-list">
+
+                        {% for category in category.children %}
+                            <li class="category-item">
+                                <a href="{{ path('category', {'id': category.id}) }}"
+                                   class="category-link"><span class="category-title">{{ category.title }}</span></a>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            {% endif %}
+
             <div id="search-form" class="search-form">
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
                 {{ form_end(form) }}
             </div>
-
-            <div id="categories" class="categories-container">
-                <ul class="categories-list">
-
-                    {% for category in categories %}
-                        <li class="category-item">
-                            <a href="{{ path('category', {'id': category.id}) }}"
-                               class="category-link"><span class="category-title">{{ category.title }}</span></a>
-                        </li>
-                    {% endfor %}
-
-                </ul>
-            </div>
-
 
             <div id="products" class="product-container">
                 <ul class="product-list">

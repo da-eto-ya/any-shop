@@ -85,4 +85,3 @@ class ProductImage
         return $this->alt;
     }
 }
-

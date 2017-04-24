@@ -45,11 +45,11 @@ class CatalogueController extends Controller
         }
 
         $criteria->setCategory($category);
+
         /** @var Product[] $products */
         $products = $productRepository->search($criteria);
-
         /** @var Category[] $categories */
-        $categories = $categoryRepository->findAll();
+        $categories = $categoryRepository->findTopCategories();
 
         return [
             'products'   => $products,

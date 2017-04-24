@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,6 +30,20 @@ class Category
     private $title;
 
     /**
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
+     */
+    private $parent;
+
+    /**
+     * @var ArrayCollection|Category[]|array
+     *
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+     */
+    private $children;
+
+    /**
      * Get id
      *
      * @return int
@@ -36,6 +51,11 @@ class Category
     public function getId()
     {
         return $this->id;
+    }
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
     }
 
     /**
@@ -61,5 +81,58 @@ class Category
     {
         return $this->title;
     }
+
+    /**
+     * @param Category|null $parent
+     *
+     * @return Category
+     */
+    public function setParent(?Category $parent): Category
+    {
+        $this->parent = $parent;
+
+        return $this;
 }
 
+    /**
+     * @return Category|null
+     */
+    public function getParent(): ?Category
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Add child
+     *
+     * @param Category $child
+     *
+     * @return Category
+     */
+    public function addChild(Category $child)
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove child
+     *
+     * @param Category $child
+     */
+    public function removeChild(Category $child)
+    {
+        $this->children->removeElement($child);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+}
