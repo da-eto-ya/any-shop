@@ -23,7 +23,8 @@ class ProductSearchType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => ProductSearchCriteria::class,
+                'data_class'      => ProductSearchCriteria::class,
+                'csrf_protection' => false,
             ]
         );
     }
