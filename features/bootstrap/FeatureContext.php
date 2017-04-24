@@ -99,6 +99,20 @@ class FeatureContext extends MinkContext implements Context
     }
 
     /**
+     * @Transform :existingCategory
+     *
+     * @param string $existingCategory
+     *
+     * @return Category
+     */
+    public function castTitleToExistingCategory(string $existingCategory)
+    {
+        $repository = $this->getEntityManager()->getRepository(Category::class);
+
+        return $repository->findOneBy(['title' => $existingCategory]);
+    }
+
+    /**
      * @Transform :imageFromFixture
      *
      * @param string $imageFromFixture
@@ -152,6 +166,21 @@ class FeatureContext extends MinkContext implements Context
         $em = $this->getEntityManager();
         $em->persist($category);
         $em->flush($category);
+    }
+
+    /**
+     * @Given shop sells :product in :existingCategory
+     *
+     * @param Product  $product
+     * @param Category $existingCategory
+     */
+    public function shopSellsIn(Product $product, Category $existingCategory)
+    {
+        $product->setCategory($existingCategory);
+
+        $em = $this->getEntityManager();
+        $em->persist($product);
+        $em->flush();
     }
 
     /**

@@ -22,3 +22,13 @@ Feature: Product categories
     And I follow "Laptops"
     Then I follow "Any Shop"
     And I should see "Welcome to Any Shop"
+
+  Scenario: Category contains products with images
+    Given shop sells "Lenovo S200z" in "All-in-one"
+    And shop sells "Lenovo ThinkPad X1 Yoga" in "Laptops"
+    And product "Lenovo ThinkPad X1 Yoga" has image "images/product/yoga.jpg"
+    When I am on "/"
+    And I follow "Laptops"
+    Then I should see "Lenovo ThinkPad X1 Yoga"
+    And the ".product-list" element should contain "Image for Lenovo ThinkPad X1 Yoga"
+    But I should not see "Lenovo S200z"

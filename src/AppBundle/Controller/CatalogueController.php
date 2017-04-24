@@ -30,24 +30,23 @@ class CatalogueController extends Controller
      */
     public function categoryAction(?Category $category, Request $request)
     {
-        /** @var Form $searchForm */
-        $searchForm = $this->createForm(ProductSearchType::class);
         /** @var ProductRepository $productRepository */
         $productRepository = $this->getDoctrine()->getRepository(Product::class);
         /** @var CategoryRepository $categoryRepository */
         $categoryRepository = $this->getDoctrine()->getRepository(Category::class);
 
+        $criteria = new ProductSearchCriteria();
+        /** @var Form $searchForm */
+        $searchForm = $this->createForm(ProductSearchType::class, $criteria);
         $searchForm->handleRequest($request);
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-            /** @var ProductSearchCriteria $criteria */
             $criteria = $searchForm->getData();
-            /** @var Product[] $products */
-            $products = $productRepository->search($criteria);
-        } else {
-            /** @var Product[] $products */
-            $products = $productRepository->findAll();
         }
+
+        $criteria->setCategory($category);
+        /** @var Product[] $products */
+        $products = $productRepository->search($criteria);
 
         /** @var Category[] $categories */
         $categories = $categoryRepository->findAll();

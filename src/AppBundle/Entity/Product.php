@@ -36,6 +36,13 @@ class Product
     private $image;
 
     /**
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="Category")
+     */
+    private $category;
+
+    /**
      * @return int
      */
     public function getId()
@@ -81,5 +88,25 @@ class Product
     public function getImage(): ?ProductImage
     {
         return $this->image;
+    }
+
+    /**
+     * @param Category|null $category
+     *
+     * @return Product
+     */
+    public function setCategory(?Category $category): Product
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Category|null
+     */
+    public function getCategory(): ?Category
+    {
+        return $this->category;
     }
 }

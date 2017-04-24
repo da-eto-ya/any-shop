@@ -25,11 +25,18 @@ class ProductRepository extends EntityRepository
         $builder = $this->createQueryBuilder('p');
 
         if ($criteria->getQuery()) {
-            $builder->andWhere("LOWER(p.title) LIKE LOWER(:titleLike) ESCAPE '".self::LIKE_ESCAPE_CHAR."'");
-            $builder->setParameter(
-                'titleLike',
-                $this->createLikeAnywherePattern($criteria->getQuery(), self::LIKE_ESCAPE_CHAR)
-            );
+            $builder
+                ->andWhere("LOWER(p.title) LIKE LOWER(:titleLike) ESCAPE '".self::LIKE_ESCAPE_CHAR."'")
+                ->setParameter(
+                    'titleLike',
+                    $this->createLikeAnywherePattern($criteria->getQuery(), self::LIKE_ESCAPE_CHAR)
+                );
+        }
+
+        if ($criteria->getCategory()) {
+            $builder
+                ->andWhere("p.category = :category")
+                ->setParameter('category', $criteria->getCategory());
         }
 
         return $builder->getQuery()->getResult();
